@@ -26,7 +26,7 @@ public class PlaylistManager {
      * @param name
      * @return
      */
-    public Playlist createPlaylist(String name, List<Song> songs) {
+    public static Playlist createPlaylist(String name, List<Song> songs) {
         Playlist playlist = new Playlist(name, songs);
         playlists.add(playlist);
         return playlist;

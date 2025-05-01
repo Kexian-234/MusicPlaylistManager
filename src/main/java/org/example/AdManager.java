@@ -30,7 +30,7 @@ public class AdManager {
      */
     public static Ad getNextAd() {
         if (adQueue.isEmpty()) {
-            return new Ad("Generic", "This is a fallback ad.");
+            return new Ad("Null", "No ads found.");
         }
         Ad next = adQueue.poll();
         adQueue.add(next);
