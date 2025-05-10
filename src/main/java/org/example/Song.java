@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 public abstract class Song implements Playable, Comparable<Song> {
@@ -7,6 +8,20 @@ public abstract class Song implements Playable, Comparable<Song> {
     private String artist;
     private int releaseYear;
     private long playCount;
+
+    // INNER COMPARATOR CLASSES
+    public static class CompareByPlayCount implements Comparator<Song> {
+        @Override
+        public int compare(Song a, Song b) {
+            return Long.compare(b.playCount, a.playCount);
+        }
+    }
+    public static class CompareByReleaseDate implements Comparator<Song> {
+        @Override
+        public int compare(Song a, Song b) {
+            return Integer.compare(b.releaseYear, a.releaseYear);
+        }
+    }
 
     /**
      * Constructs a Song object
@@ -38,6 +53,16 @@ public abstract class Song implements Playable, Comparable<Song> {
     public int compareTo(Song other) {
         return this.title.compareToIgnoreCase(other.title);
     }
+
+    // Comparators
+    public static Comparator<Song> byPlayCountDescending() {
+        return new CompareByPlayCount();
+    }
+
+    public static Comparator<Song> byReleaseYearDescending() {
+        return new CompareByReleaseDate();
+    }
+
 
     // Getters and Setters
     public String getTitle() {
@@ -104,7 +129,6 @@ public abstract class Song implements Playable, Comparable<Song> {
         System.out.println("Playing a song: " + this.title + " By " + this.artist);
     }
 
-    //TODO: adding comparators to sort songs by different attributes
 }
 
 

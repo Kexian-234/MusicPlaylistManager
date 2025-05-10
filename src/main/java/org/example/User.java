@@ -5,7 +5,7 @@ import java.util.List;
 
 public abstract class User {
     private String username;
-    private List<Playlist> myPlaylists;
+    protected List<Playlist> myPlaylists;
 
     public User(String username) {
         this.username = username;
@@ -19,11 +19,21 @@ public abstract class User {
 
     /**
      * Adds an existing playlist to user's saved playlists.
-     * @param playlist
+     * @param name
      */
-    public void addPlaylist(Playlist playlist) {
-        myPlaylists.add(playlist);
+    public void loadPlaylist(String name) {
+        Playlist found = PlaylistManager.findPlaylistByName(name);
+        if (found == null) {
+            System.out.println("Playlist not found in PlaylistManager.");
+            return;
+        }
+
+        if (!myPlaylists.contains(found)) {
+            myPlaylists.add(found);
+        }
     }
+
+
 
     /**
      * abstract method that plays a song, to be implemented by subclasses of User
@@ -37,3 +47,4 @@ public abstract class User {
      */
     public abstract void playPlaylist(Playlist playlist);
 }
+
